@@ -57,7 +57,7 @@ Extract the Elemental Warrior's Pre-built wine binaries to Lutris wine directory
 
 # Lutris
 ```
-/home/USER/.local/share/lutris/runners/wine/
+$HOME/.local/share/lutris/runners/wine/
 ```
 
 
