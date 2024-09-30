@@ -9,6 +9,8 @@ This guide helps Installing and running Affinity apps on linux as very usable st
 
 (Note: Affinity software version 1.10.4 and later releases require .winmd files from an existing Windows 10+ install.)
 
+*if you already have installed affinity apps by following Wanesty's guide, you can refere to
+
 ## Dependencies
 ## Required dependencies
 
