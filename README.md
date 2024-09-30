@@ -55,7 +55,7 @@ Download the newest release [Here](https://github.com/22Pacific/ElementalWarrior
 
 Extract the Elemental Warrior's Pre-built wine binaries to Lutris wine directory
 
-#Lutris
+# Lutris
 ```
 /home/USER/.local/share/lutris/runners/wine/
 ```
