@@ -202,11 +202,9 @@ sudo pacman -S opencl-nvidia
 
 Download VKD3D-Proton for Lutris from [ProtonPlus](https://github.com/Vysp3r/ProtonPlus) or [Protonupqt](https://github.com/DavidoTek/ProtonUp-Qt)
 
-(This might also work with Heroic Games Launcher.)
-
 ## Configuring Lutris
 
-1. Open Lutris and go to the game's or app's configuration settings.
+1. Open Lutris and go to the affinity app's configuration settings.
 2. Navigate to **Runner Options**.
 3. Select **vkd3d-proton** as the VKD3D version.
 4. Disable **DXVK**.
