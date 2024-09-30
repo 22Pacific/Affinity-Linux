@@ -5,7 +5,7 @@ Installation and Usage Guide for Serif's [Affinity](https://affinity.serif.com/e
 
 This guide is an easy to follow step-by-step process on GUI without requiring to build [ElementalWarrior](https://gitlab.winehq.org/ElementalWarrior)'s Wine and without rum.
 
-This guide helps Installing and running Affinity apps on linux as very usable state with open-cl enabled for Nvidia users and with exporting function working on Affinity apps.
+This guide helps Installing and running Affinity apps on linux as very usable state with opencl (hardware accelaration) enabled for Nvidia users and with exporting functionality working (adding vcrun2015 by winetricks) on Affinity apps.
 
 (Note: Affinity software version 1.10.4 and later releases require .winmd files from an existing Windows 10+ install.)
 
@@ -185,3 +185,32 @@ drive_c/Program Files/Affinity/Publisher 2/Publisher.exe
 ```
 
 Click save & launch it.
+
+## Opencl on Nvidia
+If you have Nvidia GPU, you can enable opencl (hardware accelaration) by following below steps
+
+## Installing OpenCL Drivers for Nvidia GPU
+
+Ensure the GPU drivers and OpenCL drivers are installed for your GPU.
+
+For example, on **Arch Linux** & **Nvidia**:
+```
+sudo pacman -S opencl-nvidia
+```
+
+## Installing VKD3D-Proton
+
+Download VKD3D-Proton for Lutris from [ProtonPlus](https://github.com/Vysp3r/ProtonPlus) or [Protonupqt](https://github.com/DavidoTek/ProtonUp-Qt)
+
+(This might also work with Heroic Games Launcher.)
+
+## Configuring Lutris
+
+1. Open Lutris and go to the game's or app's configuration settings.
+2. Navigate to **Runner Options**.
+3. Select **vkd3d-proton** as the VKD3D version.
+4. Disable **DXVK**.
+
+## Launching Affinity Apps
+
+Run the Affinity apps and verify OpenCL is working by checking the preferences for hardware acceleration.
