@@ -51,3 +51,22 @@ sudo apt install lutris
 ```
 
 ## Installing Affinity Linux's Prebuilt Wine
+Head to the github and Download the newest release [Here](https://github.com/22Pacific/43-ElementalWarrior-wine-binaries/releases/tag/affinity-photo3-wine9.13-part3)
+
+Extract the Elemental Warrior's Pre-built wine binaries to Lutris wine directory
+
+#Lutris
+```
+/home/USER/.local/share/lutris/runners/wine/
+```
+
+
+## Downloading Affinity
+
+[Affinity Designer](https://store.serif.com/update/windows/designer/2/)
+
+[Affinity Photo](https://store.serif.com/update/windows/photo/2/)
+
+[Affinity Publisher](https://store.serif.com/update/windows/publisher/2/)
+
+From the Drop down Choose the exe
