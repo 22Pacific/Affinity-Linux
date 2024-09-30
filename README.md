@@ -102,7 +102,7 @@ Finish
 
 ## Initialize the prefix
 
-In order to initialize the prefix run the setup file from heroic. (It'll probably crash wait for it to crash if it somehow opens up close it yourself)
+In order to initialize the prefix run the setup file from lutris. (It'll probably crash wait for it to crash if it somehow opens up close it yourself)
 
 ## Setting Up Affinity Wine Settings and Winetricks
 
