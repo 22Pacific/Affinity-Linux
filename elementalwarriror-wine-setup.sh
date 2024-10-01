@@ -1,90 +1,133 @@
 #!/bin/bash
 
-# Check for required dependencies
-missing_deps=""
+# Set strict mode
+set -euo pipefail
 
-check_dependency() {
-  if ! command -v "$1" &> /dev/null; then
-    missing_deps+="$1 "
-  fi
+# Function to log messages
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-check_dependency "wine"
-check_dependency "winetricks"
-check_dependency "wget"
-check_dependency "curl"
-check_dependency "7z"
-check_dependency "tar"
-check_dependency "unzip" # Added unzip for .zip file extraction
+# Function to check dependencies
+check_dependencies() {
+    local deps=("wine" "winetricks" "wget" "curl" "7z" "tar" "unzip" "jq")
+    local missing_deps=()
 
-if [ -n "$missing_deps" ]; then
-  echo "The following dependencies are missing: $missing_deps"
-  echo "Please install them and rerun the script."
-  exit 1
-fi
+    for dep in "${deps[@]}"; do
+        if ! command -v "$dep" &> /dev/null; then
+            missing_deps+=("$dep")
+        fi
+    done
 
-echo "All dependencies are installed!"
-sleep 2
+    if [ ${#missing_deps[@]} -ne 0 ]; then
+        log "ERROR: Missing dependencies: ${missing_deps[*]}"
+        log "Please install them and rerun the script."
+        exit 1
+    fi
+    log "All dependencies are installed!"
+}
 
-directory="$HOME/.AffinityLinux"
-repo="22Pacific/ElementalWarrior-wine-binaries" #Owner/Repo
-filename="ElementalWarriorWine.zip" #Filename
+# Function to safely create directory
+create_directory() {
+    local dir="$1"
+    if [ ! -d "$dir" ]; then
+        mkdir -p "$dir" || { log "ERROR: Failed to create directory $dir"; exit 1; }
+    fi
+}
 
-# Kill wine processes
-wineserver -k
+# Function to download file with verification
+download_file() {
+    local url="$1"
+    local output="$2"
+    local description="$3"
 
-# Create install directory if it doesn't exist
-mkdir -p "$directory"
+    log "Downloading $description..."
+    if ! wget -q "$url" -O "$output"; then
+        log "ERROR: Failed to download $description"
+        return 1
+    fi
+    return 0
+}
 
-# Fetch the latest release information from GitHub
-release_info=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
-download_url=$(echo "$release_info" | jq -r ".assets[] | select(.name == \"$filename\") | .browser_download_url")
-[ -z "$download_url" ] && { echo "File not found in the latest release"; exit 1; }
+# Main script execution
+main() {
+    # Configuration
+    local directory="$HOME/.AffinityLinux"
+    local repo="22Pacific/ElementalWarrior-wine-binaries"
+    local filename="ElementalWarriorWine.zip"
 
-# Download the specific release asset
-wget -q "$download_url" -O "$directory/$filename" # Download wine binaries
+    # Check dependencies
+    check_dependencies
 
-# Check if the downloaded file size matches GitHub's reported size
-github_size=$(echo "$release_info" | jq -r ".assets[] | select(.name == \"$filename\") | .size")
-local_size=$(wc -c < "$directory/$filename")
+    # Kill wine processes
+    wineserver -k || log "Note: No wine processes were running"
 
-if [ "$github_size" -eq "$local_size" ]; then
-    echo "File sizes match: $local_size bytes"
-else
-    echo "File sizes do not match: GitHub size: $github_size bytes, Local size: $local_size bytes"
-    echo "Please download $filename manually from $download_url and move it to $directory, then press any key to continue."
-    read -n 1
-fi
+    # Create install directory
+    create_directory "$directory"
 
-# Download additional files (with error checking)
-if ! wget https://upload.wikimedia.org/wikipedia/commons/3/3c/Affinity_Designer_2-logo.svg -O "/home/$USER/.local/share/icons/AffinityDesigner.svg"; then
-  echo "Failed to download Affinity Designer logo."
-  exit 1
-fi
+    # Fetch latest release information
+    log "Fetching release information..."
+    local release_info
+    release_info=$(curl -s "https://api.github.com/repos/$repo/releases/latest") || { log "ERROR: Failed to fetch release info"; exit 1; }
+    local download_url
+    download_url=$(echo "$release_info" | jq -r ".assets[] | select(.name == \"$filename\") | .browser_download_url")
 
-if ! wget https://archive.org/download/win-metadata/WinMetadata.zip -O "$directory/Winmetadata.zip"; then
-  echo "Failed to download WinMetadata.zip."
-  exit 1
-fi
+    if [ -z "$download_url" ]; then
+        log "ERROR: File not found in the latest release"
+        exit 1
+    fi
 
-# Extract the wine binary (.zip file)
-unzip "$directory/$filename" -d "$directory"
+    # Download and verify wine binaries
+    download_file "$download_url" "$directory/$filename" "wine binaries"
 
-# Remove the original .zip file after extraction
-rm "$directory/$filename"
+    # Verify file size
+    local github_size
+    github_size=$(echo "$release_info" | jq -r ".assets[] | select(.name == \"$filename\") | .size")
+    local local_size
+    local_size=$(wc -c < "$directory/$filename")
 
-# WINETRICKS setup
-WINEPREFIX="$directory" winetricks --unattended dotnet35 dotnet48 corefonts
-WINEPREFIX="$directory" winetricks renderer=vulkan
+    if [ "$github_size" -ne "$local_size" ]; then
+        log "WARNING: File size mismatch. Expected: $github_size, Got: $local_size"
+        log "Please download $filename manually from $download_url"
+        exit 1
+    fi
 
-#Set windows version to 11
-WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/winecfg" -v win11
+    # Download additional files
+    download_file "https://upload.wikimedia.org/wikipedia/commons/3/3c/Affinity_Designer_2-logo.svg" \
+                  "/home/$USER/.local/share/icons/AffinityDesigner.svg" \
+                  "Affinity Designer logo"
 
-# Extract & delete WinMetadata.zip
-7z x "$directory/Winmetadata.zip" -o"$directory/drive_c/windows/system32"
-rm "$directory/Winmetadata.zip"
+    download_file "https://archive.org/download/win-metadata/WinMetadata.zip" \
+                  "$directory/Winmetadata.zip" \
+                  "WinMetadata"
 
-#Wine dark theme
-wget https://raw.githubusercontent.com/Twig6943/AffinityOnLinux/main/wine-dark-theme.reg -O "$directory/wine-dark-theme.reg"
-WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/regedit" "$directory/wine-dark-theme.reg"
-rm "$directory/wine-dark-theme.reg"
+    # Extract files
+    log "Extracting files..."
+    unzip -q "$directory/$filename" -d "$directory"
+    rm "$directory/$filename"
+
+    # WINETRICKS setup
+    log "Configuring Wine environment..."
+    WINEPREFIX="$directory" winetricks --unattended dotnet35 dotnet48 corefonts
+    WINEPREFIX="$directory" winetricks renderer=vulkan
+
+    # Set Windows version
+    WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/winecfg" -v win11
+
+    # Extract WinMetadata
+    7z x "$directory/Winmetadata.zip" -o"$directory/drive_c/windows/system32"
+    rm "$directory/Winmetadata.zip"
+
+    # Apply Wine dark theme
+    download_file "https://raw.githubusercontent.com/Twig6943/AffinityOnLinux/main/wine-dark-theme.reg" \
+                  "$directory/wine-dark-theme.reg" \
+                  "Wine dark theme registry file"
+
+    WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/regedit" "$directory/wine-dark-theme.reg"
+    rm "$directory/wine-dark-theme.reg"
+
+    log "Setup completed successfully!"
+}
+
+# Run main function
+main "$@"
