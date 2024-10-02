@@ -21,7 +21,6 @@ sudo dnf install git winetricks
 sudo zypper install git winetricks
 ```
 
-
 ## Installing Lutris
 ## Fedora
 
@@ -62,14 +61,13 @@ From the Drop down Choose the exe
 
 ## Settings Up Lutris For Affinity
 Open up lutris and then click on
-```
-+ Button
-```
+
+* add button(+)
+
 and at the bottom
 
-```
-Add Locally Install Game
-```
+* Add Locally Install Game
+
 
 Name it According to the Affinity app you are using
 
@@ -81,10 +79,7 @@ Set the wine version to ElementalWarriorWine
 
 Select the setup .exe you've downloaded from affinity's website as the executable
 
-Click
-```
-Finish
-```
+Click Finish
 
 ## Initialize the prefix
 
@@ -96,54 +91,40 @@ In order to initialize the prefix run the setup file from lutris. (It'll probabl
 
 * open winetricks from there (it will open up a popup window which is winetrick GUI)
 
-Select
-```
-Select the default wineprefix
-```
-Select
-```
-install a windows dll and components
-```
+* Select the default wineprefix
+* install a windows dll and components
+
 and click OK
 
-* Search & install these dependencies;
-```
-dotnet48
-```
-```
-vcrun2015
-``````
-* click ok
+ Search & install these dependencies;
 
-```
-install a font
-```
-* click ok
+* dotnet48
+* vcrun2015
+
+click ok
+
+* install a font
+
+click ok
 
 * Search & install
-```
-corefonts
-``````
+* corefonts
+
 (Wait while its installing the dependencies. Its %90 not stuck but rather taking its time!!!)
 
 * click ok
 
-```
-Change settings
-```
-Toggle
-```
-win11
-```
-Toggle
+* Change settings
 
-```
-renderer=vulkan
-```
+Toggle
+ * win11
+
+Toggle
+ * renderer=vulkan
+
 and click OK
 
 Keep pressing "Cancel" till the winetricks window closes
-
 
 ## Placing WinMetadata
 
