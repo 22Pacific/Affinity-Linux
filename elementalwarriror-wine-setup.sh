@@ -102,6 +102,10 @@ main() {
     unzip -q "$directory/$filename" -d "$directory"
     rm "$directory/$filename"
 
+    # Extract WinMetadata
+    7z x "$directory/Winmetadata.zip" -o"$directory/drive_c/windows/system32"
+    rm "$directory/Winmetadata.zip"
+
     # WINETRICKS setup
     log "Configuring Wine environment..."
     WINEPREFIX="$directory" winetricks --unattended dotnet35 dotnet48 corefonts
@@ -109,10 +113,6 @@ main() {
 
     # Set Windows version
     WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/winecfg" -v win11
-
-    # Extract WinMetadata
-    7z x "$directory/Winmetadata.zip" -o"$directory/drive_c/windows/system32"
-    rm "$directory/Winmetadata.zip"
 
     log "Setup completed successfully!"
 }
