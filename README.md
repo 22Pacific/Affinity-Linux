@@ -10,9 +10,10 @@ This guide helps Installing and running Affinity apps on linux as very usable st
 
 (Note: Affinity software version 1.10.4 and later releases require .winmd files from an existing Windows 10+ install.)
 
-*if you already have installed affinity apps by following Wanesty's guide, you can refere to
-## [improvements for wanesty's guide installation](https://github.com/22Pacific/Affinity-Linux/blob/main/improvements%20for%20wanesty's%20guide%20installation.md)
-
 ## [Wine setup Script and Installation](https://github.com/22Pacific/Affinity-Linux/blob/main/script%20wine%20setup.md)
 
 ## [Manual Guide Installation](https://github.com/22Pacific/Affinity-Linux/blob/main/Manual%20Guide.md)
+
+*if you already have installed affinity apps by following Wanesty's guide, you can refere to
+
+## [improvements for wanesty's guide installation](https://github.com/22Pacific/Affinity-Linux/blob/main/improvements%20for%20wanesty's%20guide%20installation.md)
