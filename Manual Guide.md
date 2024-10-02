@@ -137,22 +137,13 @@ to  drive_c/windows/system32 on the wineprefix
 Press launch and the setup should work
 
 Once its done installing right click to affinity on lutris and go to configure
+* Game options
 
-```
-Game options
-```
 Next Change the executable to
 
-```
-drive_c/Program Files/Affinity/Photo 2/Photo.exe
-```
-```
-drive_c/Program Files/Affinity/Designer 2/Designer.exe
-```
-
-```
-drive_c/Program Files/Affinity/Publisher 2/Publisher.exe
-```
+* drive_c/Program Files/Affinity/Photo 2/Photo.exe
+* drive_c/Program Files/Affinity/Designer 2/Designer.exe
+* drive_c/Program Files/Affinity/Publisher 2/Publisher.exe
 
 Click save & launch it.
 
