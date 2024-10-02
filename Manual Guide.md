@@ -68,7 +68,6 @@ and at the bottom
 
 * Add Locally Install Game
 
-
 Name it According to the Affinity app you are using
 
 ## Setting the Wine Version
