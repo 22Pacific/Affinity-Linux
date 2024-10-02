@@ -14,6 +14,7 @@ This guide helps Installing and running Affinity apps on linux as very usable st
 
 ## [Manual Guide Installation](https://github.com/22Pacific/Affinity-Linux/blob/main/Manual%20Guide.md)
 
+____________________________________________________________________________________________
 *if you already have installed affinity apps by following Wanesty's guide, you can refere to
 
 ## [improvements for wanesty's guide installation](https://github.com/22Pacific/Affinity-Linux/blob/main/improvements%20for%20wanesty's%20guide%20installation.md)
