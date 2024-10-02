@@ -63,7 +63,7 @@ trap cleanup EXIT  # Cleanup will always run when the script exits
 # Main script execution
 main() {
     # Configuration: Using a timestamp-based directory for better organization
-    local directory="$HOME/.AffinityLinux_$(date '+%Y-%m-%d_%H-%M-%S')"
+    local directory="$HOME/.AffinityLinux"
     local repo="22Pacific/ElementalWarrior-wine-binaries"
     local filename="ElementalWarriorWine.zip"
 
