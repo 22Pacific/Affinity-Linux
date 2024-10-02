@@ -125,13 +125,6 @@ main() {
     # Set Windows version
     WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/winecfg" -v win11
 
-    # Apply Wine dark theme
-    download_file "https://raw.githubusercontent.com/Twig6943/AffinityOnLinux/main/wine-dark-theme.reg" \
-                  "$directory/wine-dark-theme.reg" \
-                  "Wine dark theme registry file"
-
-    WINEPREFIX="$directory" "$directory/ElementalWarriorWine/bin/regedit" "$directory/wine-dark-theme.reg"
-    rm "$directory/wine-dark-theme.reg"
 
     log "INFO" "Setup completed successfully!"
 }
