@@ -35,62 +35,42 @@ From the Drop down Choose the exe
 
 ## Settings Up Lutris For Affinity
 Open up lutris and then click on
-```
-+ Button
-```
+
+* add button(+)
+
 and at the bottom
 
-```
-Add Locally Install Game
-```
+* Add Locally Install Game
 
 Name it According to the Affinity app you are using
 
-*in configuration, set the wineprefix to
+in configuration, set the wineprefix to
+ * $HOME/.AffinityLinux
 
-```
-$HOME/.AffinityLinux
-```
-
-*in configuration, set the wine-version to custom and add the custom wine executable to
-
-```
-$HOME/.AffinityLinux/ElementalWarriorWine/bin/wine
-```
+ in configuration, set the wine-version to custom and add the custom wine executable to
+ * $HOME/.AffinityLinux/ElementalWarriorWine/bin/wine
 
 ## Selecting the Programs .exe According to what you Want to Install
 
-Select the setup .exe you've downloaded from affinity's website as the executable
+ Select the setup .exe you've downloaded from affinity's website as the executable
 
-Click
-```
-Finish
-```
+ Click Finish
 
 
 ## Running Affinity Setup and Installing Photo/Designer/Publisher
 
-Press launch and the setup should work
+ Press launch and the setup should work
 
-Once its done installing right click to affinity on lutris and go to configure
+ Once its done installing right click to affinity on lutris and go to configure
+ * Game options
 
-```
-Game options
-```
-Next Change the executable to
+ Next Change the executable to
 
-```
-drive_c/Program Files/Affinity/Photo 2/Photo.exe
-```
-```
-drive_c/Program Files/Affinity/Designer 2/Designer.exe
-```
+ * drive_c/Program Files/Affinity/Photo 2/Photo.exe
+ * drive_c/Program Files/Affinity/Designer 2/Designer.exe
+ * drive_c/Program Files/Affinity/Publisher 2/Publisher.exe
 
-```
-drive_c/Program Files/Affinity/Publisher 2/Publisher.exe
-```
-
-Click save & launch it.
+ Click save & launch it.
 
 ## Opencl on Nvidia
 If you have Nvidia GPU, you can enable opencl (hardware accelaration) by following below steps
