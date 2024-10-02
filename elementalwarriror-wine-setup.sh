@@ -56,7 +56,6 @@ cleanup() {
     log "INFO" "Cleaning up temporary files..."
     rm -f "$directory/$filename"
     rm -f "$directory/Winmetadata.zip"
-    rm -f "$directory/wine-dark-theme.reg"
 }
 trap cleanup EXIT  # Cleanup will always run when the script exits
 
