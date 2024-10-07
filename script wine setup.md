@@ -2,7 +2,7 @@
 ```
 curl -sSL https://raw.githubusercontent.com/22Pacific/Affinity-Linux/main/elementalwarriror-wine-setup.sh | bash
 ```
-(the script will take some time please wwait until its done)
+(the script will take some time please wait until its done)
 
 *After the script is done, you can install Affinity apps by using lutris
 
